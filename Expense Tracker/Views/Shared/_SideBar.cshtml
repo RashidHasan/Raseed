@@ -1,0 +1,288 @@
+﻿@{
+    List<Object> menuItems = new List<Object>();
+
+
+
+
+
+
+
+    bool isUserLoggedIn = Context.Request.Cookies.ContainsKey(".AspNetCore.Cookies");
+
+
+
+    if (isUserLoggedIn)
+
+    {
+
+        menuItems.Add(new
+
+        {
+
+            text = "Dashboard",
+
+            url = "/",
+
+            iconCss = "fa-solid fa-box",
+
+        });
+
+        menuItems.Add(new
+
+        {
+
+            text = "General",
+
+            separator = true,
+
+        });
+
+        menuItems.Add(new
+
+        {
+
+            text = "Categories",
+
+            url = "/Category",
+
+            iconCss = "fa-solid fa-folder-closed",
+
+        });
+
+        menuItems.Add(new
+
+        {
+
+            text = "Transactions",
+
+            url = "/Transaction",
+
+            iconCss = "fa-solid fa-arrow-right-arrow-left",
+
+        });
+
+
+
+        menuItems.Add(new
+
+        {
+
+            text = "Notifications",
+
+            url = "/Notifications",
+
+            iconCss = "fa-solid fa-bell",
+
+            badge = "New" // Placeholder badge, replaced by dynamic JS later
+
+        });
+
+
+
+        menuItems.Add(new
+
+        {
+
+            text = "Extras",
+
+            separator = true,
+
+        });
+
+        menuItems.Add(new
+
+        {
+
+            text = "Settings",
+
+            iconCss = "fa-solid fa-gear",
+
+            url = "/Settings"
+
+        });
+
+
+
+        menuItems.Add(new
+
+        {
+
+            text = "Chat",
+
+            separator = true,
+
+        });
+
+        menuItems.Add(new
+
+        {
+
+            text = "Find a Friend",
+
+            url = "/Friend/AddFriend",
+
+            iconCss = "fa-solid fa-user-plus",
+
+        });
+
+        menuItems.Add(new
+
+        {
+
+            text = "Pending Requests",
+
+            url = "/Friend/GetPendingRequests",
+
+            iconCss = "fa-solid fa-envelope",
+
+        });
+
+        menuItems.Add(new
+
+        {
+
+            text = "Chats",
+
+            url = "/Friend/Chats",
+
+            iconCss = "fa-solid fa-comments",
+
+        });
+
+        menuItems.Add(new
+
+        {
+
+            text = "Auth",
+
+            separator = true,
+
+        });
+
+
+
+        menuItems.Add(new
+
+        {
+
+            text = "Logout",
+
+            url = "/Account/Logout",
+
+            iconCss = "fa-solid fa-sign-out-alt",
+
+        });
+
+    }
+
+    else
+
+    {
+
+        menuItems.Add(new
+
+        {
+
+            text = "Login",
+
+            url = "/Account/Login",
+
+            iconCss = "fa-solid fa-sign-in-alt",
+
+        });
+
+        menuItems.Add(new
+
+        {
+
+            text = "Register",
+
+            url = "/Account/Register",
+
+            iconCss = "fa-solid fa-user-plus",
+
+        });
+
+    }
+
+
+
+    var userFullName = User.Identity.IsAuthenticated
+
+        ? User.FindFirst("FullName")?.Value ?? "User"
+
+        : "Guest";
+}
+
+<ejs-sidebar id="sidebar" width="290px" enableDock dockSize="100px"
+             target=".dock-target" enableGestures="false">
+    <e-content-template>
+
+        <div class="logo-wrapper">
+            <div class="app-logo">
+                <img src="~/logo.png" />
+            </div>
+            <div class="w-100"></div>
+            <i id="sidebar-toggler" class="fa-solid"></i>
+        </div>
+
+        <div class="profile-wrapper">
+            <img class="profile-pic" src="~/profile.jpg" />
+            <div class="titles d-flex flex-column ps-3">
+                <h6 class="mb-0">@userFullName</h6>
+            </div>
+        </div>
+
+        <!-- Main Menu with Login/Register/Logout -->
+        <ejs-menu id="menu"
+                  items="menuItems"
+                  orientation="Vertical"
+                  hamburgerMode></ejs-menu>
+    </e-content-template>
+</ejs-sidebar>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        dockBar = document.getElementById('sidebar').ej2_instances[0];
+        document.getElementById('sidebar-toggler').onclick = function () {
+            dockBar.toggle();
+        };
+
+        // Check for unread notifications and update badge
+        fetch('/Notifications/GetUnreadCount')
+            .then(response => response.json())
+            .then(data => {
+                if (data.unreadCount > 0) {
+                    const notificationMenuItem = document.querySelector('a[href="/Notifications"]');
+                    if (notificationMenuItem) {
+                        // Add badge with unread count
+                        const badge = document.createElement('span');
+                        badge.className = 'badge bg-danger ms-2';
+                        badge.textContent = data.unreadCount;
+                        notificationMenuItem.appendChild(badge);
+                    }
+                }
+            })
+            .catch(error => console.error('Error fetching unread notifications:', error));
+    });
+</script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const logoutLink = document.querySelector('a[href="/Account/Logout"]');
+        if (logoutLink) {
+            logoutLink.addEventListener('click', function (event) {
+                event.preventDefault();
+
+                // Create a form and submit it
+                const form = document.createElement('form');
+                form.method = 'POST';
+                form.action = '/Account/Logout';
+
+                // Append and submit the form
+                document.body.appendChild(form);
+                form.submit();
+            });
+        }
+    });
+</script>

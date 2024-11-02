@@ -1,0 +1,18 @@
+﻿@model Expense_Tracker.Models.Settings.ChangeNameDTO
+
+<div class="container mt-5">
+    <h2 class="text-center mb-4" style="color: var(--text-color);">Change Name</h2>
+    <form asp-action="SaveName" method="post" class="p-4 border rounded shadow-sm" style="background-color: var(--background-color-secondary);">
+        <div class="form-group mb-3">
+            <label asp-for="FirstName" class="form-label" style="color: var(--text-color-secondary);">First Name</label>
+            <input asp-for="FirstName" class="form-control" style="background-color: var(--background-color); color: var(--text-color);" required />
+            <span asp-validation-for="FirstName" class="text-danger"></span>
+        </div>
+        <div class="form-group mb-3">
+            <label asp-for="LastName" class="form-label" style="color: var(--text-color-secondary);">Last Name</label>
+            <input asp-for="LastName" class="form-control" style="background-color: var(--background-color); color: var(--text-color);" required />
+            <span asp-validation-for="LastName" class="text-danger"></span>
+        </div>
+        <button type="submit" class="btn w-100" style="background-color: var(--button-background-color); color: var(--text-color); border-color: var(--button-border-color);">Save Changes</button>
+    </form>
+</div>

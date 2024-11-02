@@ -1,0 +1,13 @@
+﻿@{
+    ViewData["Title"] = "Settings";
+}
+
+<div class="container mt-5">
+    <h2 class="text-center mb-4" style="color: var(--text-color);">Settings</h2>
+    <div class="settings-options d-flex flex-column align-items-center">
+        <a class="btn w-75 mb-3" href="@Url.Action("ChangeName", "Settings")" style="background-color: var(--button-background-color); color: var(--text-color); border-color: var(--button-border-color);">Change Name</a>
+        <a class="btn w-75 mb-3" href="@Url.Action("ChangeEmail", "Settings")" style="background-color: var(--button-background-color); color: var(--text-color); border-color: var(--button-border-color);">Change Email</a>
+        <a class="btn w-75 mb-3" href="@Url.Action("ChangePassword", "Settings")" style="background-color: var(--button-background-color); color: var(--text-color); border-color: var(--button-border-color);">Change Password</a>
+        <a class="btn w-75 mb-3" href="@Url.Action("ChangeTheme", "Settings")" style="background-color: var(--button-background-color); color: var(--text-color); border-color: var(--button-border-color);">Change Theme</a>
+    </div>
+</div>
