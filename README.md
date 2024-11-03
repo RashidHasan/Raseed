@@ -48,6 +48,7 @@
 
 ---
 <img src="https://github.com/user-attachments/assets/5d8754b4-7d96-495f-b0bf-53848d825bd0" alt="Raseed2" width="200" />
+
 ## Company Overview: Nextwo Co.
 Nextwo Co. is a leading offshore manpower services provider in the Information Technology & Services industry, headquartered in Amman, Jordan. Established in 2014, Nextwo Co. specializes in helping IT companies expand their teams in Jordan, offering a complete suite of services that go beyond office space and staffing. Nextwo Co. supports companies from the early stages of setup and recruitment through to team management, technical consultancy, administrative, financial, and legal services. The company operates with the mission of connecting businesses with skilled Jordanian talent, providing a comfortable and productive work environment that meets international standards.
 
