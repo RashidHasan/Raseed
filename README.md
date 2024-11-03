@@ -1,7 +1,7 @@
-![Raseed2](https://github.com/user-attachments/assets/ab3ed546-6292-461a-a6e5-3a7cd721a647)
+<img src="https://github.com/user-attachments/assets/ab3ed546-6292-461a-a6e5-3a7cd721a647" alt="Raseed2" width="400" />
 
-# Raseed 
-رصيد
+# Raseed | رصيد
+
 
 ## General Project Overview
 **Raseed رصيد** is an interactive social and financial management platform designed to enhance user engagement and facilitate real-time interactions and analytics. It combines social features such as chatting, friend requests, and real-time notifications with powerful financial tracking tools that provide users with insightful data visualizations. The platform allows users to stay connected, manage their relationships, and keep track of personal finance, making **Raseed رصيد** a holistic digital experience for both social and financial management.
