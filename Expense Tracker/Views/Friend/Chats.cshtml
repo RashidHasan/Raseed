@@ -1,22 +1,18 @@
-﻿@using System.Security.Claims
+﻿@model IEnumerable<Expense_Tracker.Models.Account.User>
+
 @{
-    ViewData["Title"] = "Chat";
-
-    var friendId = ViewBag.FriendId;
+    ViewData["Title"] = "Chats";
 }
 
-<div id="app" class="container mt-5" style="color: var(--text-color);">
-    <h2 class="text-center mb-4">Chat with Friend</h2>
-</div>
+<h2>Chats</h2>
+<ul>
+    @foreach (var friend in Model)
 
-@section Scripts {
-    <script src="~/lib/microsoft/signalr/dist/browser/signalr.js"></script>
-    <script src="~/js/Chat.js"></script>
-    <script>
-        // Pass the FriendId and CurrentUserId as global variables for use in Chat.js
-        window.chatConfig = {
-            friendId: "@(ViewBag.FriendId)",
-            currentUserId: "@(User.FindFirst(ClaimTypes.NameIdentifier)?.Value)"
-        };
-    </script>
-}
+    {
+        <li>
+            <a href="@Url.Action("Index", "Chat", new { friendId = friend.Id })">
+                Chat with @friend.FirstName @friend.LastName
+            </a>
+        </li>
+    }
+</ul>

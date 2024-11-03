@@ -24,16 +24,32 @@ namespace Expense_Tracker.Controllers
             return View();
         }
 
-        public async Task<IActionResult> Notificain()
+        // New method to fetch notifications via GET request
+        [HttpGet]
+        public async Task<IActionResult> GetUnreadCount()
         {
             var userId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value);
-            var notifications = await _context.Notifications
+
+            // Fetch the count of unread notifications for the current user
+            var unreadCount = await _context.Notifications
+                .Where(n => n.UserId == userId && !n.IsRead)
+                .CountAsync();
+
+            return Json(new { unreadCount });
+        }
+
+        [HttpGet]
+        public IActionResult Notification()
+        {
+            var userId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value);
+            var notifications = _context.Notifications
                 .Where(n => n.UserId == userId)
                 .OrderByDescending(n => n.Timestamp)
-                .ToListAsync();
+                .ToList();
 
             return View(notifications);
         }
+
 
         [HttpPost]
         public async Task<IActionResult> MarkAsRead(int notificationId)
